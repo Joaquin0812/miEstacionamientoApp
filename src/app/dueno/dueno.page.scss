@@ -1,0 +1,14 @@
+.image-container {
+    position: relative;
+    text-align: center;
+  }
+  
+  .profile-image {
+    position: absolute;
+    top: 20px; /* Ajusta según la posición que desees */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px; /* Ajusta el tamaño de la imagen según tus necesidades */
+    border-radius: 50%; /* Si la imagen es redonda */
+  }
+  

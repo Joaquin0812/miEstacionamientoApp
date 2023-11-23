@@ -1,0 +1,35 @@
+<!-- estacionamiento.page.html -->
+
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="ion-text-center">Mi Estacionamiento</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngFor="let estacionamiento of estacionamientos; let i = index" class="ion-text-center" style="margin-top: 20px;">
+    <p>Dirección: {{ estacionamiento.direccion }}</p>
+    <p>Valor por Hora: ${{ estacionamiento.valorPorHora }}</p>
+    <p>Estado: {{ estacionamiento.estado }}</p>
+    <ion-button expand="full" [ngClass]="{ 'habilitar-btn': estacionamiento.estado === 'Habilitado', 'deshabilitar-btn': estacionamiento.estado === 'Deshabilitado' }" (click)="cambiarEstado(i)">{{ estacionamiento.estado === 'Habilitado' ? 'Deshabilitar' : 'Habilitar' }}</ion-button>
+  </div>
+
+  <!-- Formulario para agregar estacionamiento -->
+  <div class="form-estacionamiento" style="margin-top: 20px;">
+    <ion-item>
+      <ion-label position="floating">Dirección</ion-label>
+      <ion-input type="text" [(ngModel)]="nuevaDireccion"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Valor por Hora</ion-label>
+      <ion-input type="number" [(ngModel)]="nuevoValorPorHora"></ion-input>
+    </ion-item>
+    <ion-button expand="full" color="success" (click)="agregarEstacionamiento()">Agregar Estacionamiento</ion-button>
+  </div>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-button expand="full" color="danger" class="ion-text-white" (click)="volverADueno()">Volver a Menú de Dueño</ion-button>
+  </ion-toolbar>
+</ion-footer>

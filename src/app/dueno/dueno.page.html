@@ -1,0 +1,15 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="ion-text-center">PERFIL DE: {{dueno.nombre}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <img src="https://cdn-icons-png.flaticon.com/512/3135/3135768.png" alt="Descripción de la imagen" class="center-image">
+  <ion-button expand="full" color="danger">Mi Perfil</ion-button>
+  <ion-button expand="full" color="primary" (click)="irAEstacionamiento()">Mis Estacionamientos</ion-button>
+  <ion-button expand="full" color="primary" (click)="irCalificarCliente()">Calificar último cliente</ion-button>
+  <ion-button expand="full" color="primary"(click)="irGenerarReporte()">Generar Reporte de Transacciones</ion-button>
+  <ion-button expand="full" color="danger" (click)="cerrarSesion()">Cerrar Sesión</ion-button>
+  
+</ion-content>

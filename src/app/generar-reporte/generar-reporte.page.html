@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-button expand="full" color="danger" (click)="volverADueno()">Volver a Menú de Dueño</ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-text-center">
+  <ion-list>
+    <ion-item *ngFor="let transferencia of transferencias">
+      <ion-label>
+        <h2>Fecha: {{ transferencia.fecha }}</h2>
+        <p>Monto: ${{ transferencia.monto }}</p>
+        <p>Origen: {{ transferencia.origen }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

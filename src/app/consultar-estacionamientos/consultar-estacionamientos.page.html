@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="ion-text-center" id="comuna-title">
+      CONSULTAR ESTACIONAMIENTOS
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <!-- Lista de comunas -->
+    <ion-item (click)="redireccionarAComuna(comuna)" *ngFor="let comuna of comunas">
+      {{ comuna }}
+    </ion-item>
+  </ion-list>
+
+  <!-- Botón para volver a la página Home -->
+  <ion-button expand="full" color="medium" (click)="volverAHome()">Volver a Home</ion-button>
+</ion-content>
