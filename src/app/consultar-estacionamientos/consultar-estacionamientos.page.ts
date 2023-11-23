@@ -7,13 +7,21 @@ import { Router } from '@angular/router';
   styleUrls: ['consultar-estacionamientos.page.scss'],
 })
 export class ConsultarEstacionamientosPage {
-  comunas: string[] = ['Santiago', /* ...otras comunas... */];
 
+
+  estacionamientos: any []=[]
   constructor(private router: Router) {}
 
-  redireccionarAComuna(comuna: string) {
-    this.router.navigate([`/${comuna.toLowerCase()}`]);
+  ngOnInit() {
+    fetch("http://localhost:3000/estacionamiento?estado=disponible", { method: 'GET' })
+      .then(async response => {
+        const estacionamientos = await response.json();
+        this.estacionamientos = estacionamientos;  
+      })
+      .catch(error => console.log('error', error));
   }
+
+
   volverAHome() {
     this.router.navigate(['/home']);
   }

@@ -10,8 +10,12 @@ export class HomePage {
 
   constructor(private router: Router) {}
 
-  irAInicioSesion() {
+  irAInicioSesionCliente() {
     this.router.navigate(['/inicio-sesion']);
+  }
+
+  irAInicioSesionDueno() {
+    this.router.navigate(['/inicio-sesion-dueno']);
   }
 
   irARegistro() {

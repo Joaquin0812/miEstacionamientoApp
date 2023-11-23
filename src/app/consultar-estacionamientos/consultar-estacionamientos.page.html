@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-title class="ion-text-center" id="comuna-title">
-      CONSULTAR ESTACIONAMIENTOS
+      Estacionamientos Disponibles
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -9,8 +9,12 @@
 <ion-content>
   <ion-list>
     <!-- Lista de comunas -->
-    <ion-item (click)="redireccionarAComuna(comuna)" *ngFor="let comuna of comunas">
-      {{ comuna }}
+    <ion-item *ngFor="let est of estacionamientos">
+      <ion-label>
+      <strong>Dirección: </strong>{{est.direccion}} <br>
+      <strong>Estado: </strong>{{est.disponibilidad}} <br>
+      <strong>Valor por Minuto </strong>${{est.valorPorHora}} <br>
+    </ion-label>
     </ion-item>
   </ion-list>
 

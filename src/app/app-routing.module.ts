@@ -19,7 +19,6 @@ const routes: Routes = [
     path: 'consultar-estacionamientos',
     loadChildren: () => import('./consultar-estacionamientos/consultar-estacionamientos.module').then(m => m.ConsultarEstacionamientosPageModule)
   },
-  { path: 'santiago', loadChildren: () => import('./santiago/santiago.module').then(m => m.SantiagoPageModule) },
   {
     path: 'dueno',
     loadChildren: () => import('./dueno/dueno.module').then( m => m.DuenoPageModule)
@@ -60,7 +59,12 @@ const routes: Routes = [
   {
     path: 'reservar-estacionamiento',
     loadChildren: () => import('./reservar-estacionamiento/reservar-estacionamiento.module').then( m => m.ReservarEstacionamientoPageModule)
+  },
+  {
+    path: 'inicio-sesion-dueno',
+    loadChildren: () => import('./inicio-sesion-dueno/inicio-sesion-dueno.module').then( m => m.InicioSesionDuenoPageModule)
   }
+
 ];
 
 @NgModule({

@@ -1,23 +1,19 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 
-
 @Component({
-  selector: 'app-inicio-sesion',
-  templateUrl: './inicio-sesion.page.html',
-  styleUrls: ['./inicio-sesion.page.scss'],
+  selector: 'app-inicio-sesion-dueno',
+  templateUrl: './inicio-sesion-dueno.page.html',
+  styleUrls: ['./inicio-sesion-dueno.page.scss'],
 })
-export class InicioSesionPage implements OnInit {
-
+export class InicioSesionDuenoPage implements OnInit {
+  
   mail:string=""
   pass:string=""
-  constructor(public nav:NavController) { }
+  constructor(public route:Router, public nav:NavController) { }
 
   ngOnInit() {
-    fetch("http://localhost:3000/login?email={mail}&password=123456&tipoCliente=dueño", requestOptions)
-  .then(response => response.text())
-  .then(result => console.log(result))
-  .catch(error => console.log('error', error));
   }
 
   submitForm=()=>{
@@ -37,4 +33,5 @@ export class InicioSesionPage implements OnInit {
     }
     
   }
+
 }
