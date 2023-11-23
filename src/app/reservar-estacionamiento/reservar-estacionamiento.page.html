@@ -1,13 +1,26 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>reservar-estacionamiento</ion-title>
+    <ion-title>Reservar Estacionamiento</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">reservar-estacionamiento</ion-title>
+      <ion-title size="">Reservar Estacionamiento</ion-title>
     </ion-toolbar>
   </ion-header>
+  <ion-card *ngFor="let est of estacionamientos">
+    <ion-card-header>
+      <ion-card-title>{{est.direccion}}</ion-card-title>
+      <ion-card-subtitle>Dirección</ion-card-subtitle>
+    </ion-card-header>
+  
+    <ion-card-content>
+      Valor: $ {{est.valorPorHora}}
+    </ion-card-content>
+  
+    <ion-button color='success' (click)="reservar(est._id)">Reservar</ion-button>
+    <ion-button color='secondary'>Ver en Mapa</ion-button>
+  </ion-card>
 </ion-content>
