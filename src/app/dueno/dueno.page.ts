@@ -10,11 +10,8 @@ import { LoadingController, NavController } from '@ionic/angular';
 export class DuenoPage {
 
   dueno:any=""
-  constructor(public router: Router, public nav:NavController
-  ){ 
-    this.dueno=this.router.getCurrentNavigation()?.extras.state
-    console.log(this.dueno);
-    this.dueno.nombre=(this.dueno.nombre as string).toUpperCase()
+  constructor(public router: Router, public nav:NavController){
+    
   }
 
   cerrarSesion(){

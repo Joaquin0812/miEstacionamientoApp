@@ -16,22 +16,26 @@ export class InicioSesionDuenoPage implements OnInit {
   ngOnInit() {
   }
 
-  submitForm=()=>{
-    console.log(this.mail)
-    console.log(this.pass)
-    const dominio=this.mail.split("@")[1]
-    console.log(dominio);
-    
-    if (dominio=="cliente.cl"){
-      const nombre=this.mail.split(".")[0]
-      this.nav.navigateForward("cliente",{state:{nombre:nombre,correo:this.mail}})
-    }else if(dominio=="dueno.cl"){
-      const nombre=this.mail.split(".")[0]
-      this.nav.navigateForward("dueno",{state:{nombre:nombre,correo:this.mail}})
-    }else{
-      
-    }
-    
+  irPageDueno(){
+    this.nav.navigateForward('dueno')      
+  }
+  submitForm = () => {
+    fetch(`http://localhost:3000/login?email=${this.mail}&password=${this.pass}&tipoUsuario=dueño`, { method: 'POST' })
+      .then(async response => {
+        if (response.status == 200) {
+          // exitoso
+          // redirigir a pagina
+          console.log('Login exitoso');
+          this.irPageDueno()
+
+        } else {
+          // fallido
+          // mostrar mensaje de error
+          console.log('error');
+
+        }
+      })
+      .catch(error => console.log('error', error));
   }
 
 }

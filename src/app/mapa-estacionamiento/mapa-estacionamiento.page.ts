@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
+import { NavController } from '@ionic/angular';
 import * as Leaflet from 'leaflet';
 import { icon } from 'leaflet';
 
@@ -12,10 +13,14 @@ export class MapaEstacionamientoPage implements OnInit, OnDestroy {
   map!: Leaflet.Map;
   estacionamiento: any;
 
-  constructor(public router: Router) {
+  constructor(public router: Router,public nav:NavController) {
     if (router.getCurrentNavigation()?.extras.state) {
       this.estacionamiento = this.router.getCurrentNavigation()?.extras.state;
     }
+  }
+
+  volverReservar(){
+    this.nav.navigateForward("reservar-estacionamiento")
   }
 
   ngOnInit() { }
@@ -42,6 +47,8 @@ export class MapaEstacionamientoPage implements OnInit, OnDestroy {
       .openPopup();
     // Leaflet.marker([34, 77]).addTo(this.map).bindPopup('Leh').openPopup();
   }
+
+  
 
   /** Remove map when we have multiple map object */
   ngOnDestroy() {

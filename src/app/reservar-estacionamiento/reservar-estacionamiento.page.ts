@@ -33,4 +33,8 @@ export class ReservarEstacionamientoPage implements OnInit {
     this.nav.navigateForward('mapa-estacionamiento', { state: estacionamiento });
   }
 
+  volverPerfilCliente(){
+    this.nav.navigateForward("cliente")
+  }
+
 }

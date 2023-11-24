@@ -11,9 +11,7 @@ export class ClientePage implements OnInit {
 
   cliente:any=""
   constructor(public  router:Router, public nav:NavController) { 
-    this.cliente=this.router.getCurrentNavigation()?.extras.state
-    console.log(this.cliente);
-    this.cliente.nombre=(this.cliente.nombre as string).toUpperCase()
+
   }
 
   cerrarSesion(){

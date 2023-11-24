@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 
 
@@ -11,10 +12,13 @@ export class InicioSesionPage implements OnInit {
 
   mail: string = ""
   pass: string = ""
-  constructor(public nav: NavController) { }
+  constructor(public nav: NavController, route:Router) { }
 
   ngOnInit() {
 
+  }
+  irPageCliente(){
+    this.nav.navigateForward('cliente')      
   }
 
   submitForm = () => {
@@ -22,8 +26,9 @@ export class InicioSesionPage implements OnInit {
       .then(async response => {
         if (response.status == 200) {
           // exitoso
+          console.log('Login exitoso');
           // redirigir a pagina
-          console.log('exito');
+          this.irPageCliente()
 
         } else {
           // fallido
