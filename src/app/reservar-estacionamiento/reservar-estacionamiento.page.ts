@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-reservar-estacionamiento',
@@ -8,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 export class ReservarEstacionamientoPage implements OnInit {
   estacionamientos: any[] = [];
 
-  constructor() { }
+  constructor(public nav: NavController) { }
 
   ngOnInit() {
     fetch("http://localhost:3000/estacionamiento?estado=disponible", { method: 'GET' })
@@ -26,6 +27,10 @@ export class ReservarEstacionamientoPage implements OnInit {
       this.estacionamientos = this.estacionamientos.filter(e => e._id !== estacionamiento._id)
     })
     .catch(error => console.log('error', error));
+  }
+
+  verMapa(estacionamiento: any) {
+    this.nav.navigateForward('mapa-estacionamiento', { state: estacionamiento });
   }
 
 }

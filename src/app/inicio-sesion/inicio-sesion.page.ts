@@ -9,32 +9,29 @@ import { NavController } from '@ionic/angular';
 })
 export class InicioSesionPage implements OnInit {
 
-  mail:string=""
-  pass:string=""
-  constructor(public nav:NavController) { }
+  mail: string = ""
+  pass: string = ""
+  constructor(public nav: NavController) { }
 
   ngOnInit() {
-    fetch("http://localhost:3000/login?email={mail}&password=123456&tipoCliente=dueño", requestOptions)
-  .then(response => response.text())
-  .then(result => console.log(result))
-  .catch(error => console.log('error', error));
+
   }
 
-  submitForm=()=>{
-    console.log(this.mail)
-    console.log(this.pass)
-    const dominio=this.mail.split("@")[1]
-    console.log(dominio);
-    
-    if (dominio=="cliente.cl"){
-      const nombre=this.mail.split(".")[0]
-      this.nav.navigateForward("cliente",{state:{nombre:nombre,correo:this.mail}})
-    }else if(dominio=="dueno.cl"){
-      const nombre=this.mail.split(".")[0]
-      this.nav.navigateForward("dueno",{state:{nombre:nombre,correo:this.mail}})
-    }else{
-      
-    }
-    
+  submitForm = () => {
+    fetch(`http://localhost:3000/login?email=${this.mail}&password=${this.pass}&tipoUsuario=cliente`, { method: 'POST' })
+      .then(async response => {
+        if (response.status == 200) {
+          // exitoso
+          // redirigir a pagina
+          console.log('exito');
+
+        } else {
+          // fallido
+          // mostrar mensaje de error
+          console.log('error');
+
+        }
+      })
+      .catch(error => console.log('error', error));
   }
 }

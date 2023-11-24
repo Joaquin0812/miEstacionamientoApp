@@ -63,6 +63,10 @@ const routes: Routes = [
   {
     path: 'inicio-sesion-dueno',
     loadChildren: () => import('./inicio-sesion-dueno/inicio-sesion-dueno.module').then( m => m.InicioSesionDuenoPageModule)
+  },
+  {
+    path: 'mapa-estacionamiento',
+    loadChildren: () => import('./mapa-estacionamiento/mapa-estacionamiento.module').then( m => m.MapaEstacionamientoPageModule)
   }
 
 ];
