@@ -9,9 +9,13 @@ import { NavController } from '@ionic/angular';
 })
 export class ClientePage implements OnInit {
 
-  cliente:any=""
+  cliente:any
   constructor(public  router:Router, public nav:NavController) { 
-
+    const cli: string | null=localStorage.getItem("cli")
+    if (cli!==null){
+    const cliente = JSON.parse(cli)
+    this.cliente=cliente
+    }
   }
 
   cerrarSesion(){

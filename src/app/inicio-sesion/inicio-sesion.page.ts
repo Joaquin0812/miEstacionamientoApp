@@ -27,10 +27,13 @@ export class InicioSesionPage implements OnInit {
         if (response.status == 200) {
           // exitoso
           console.log('Login exitoso');
+
           const cliente = await response.json();
-          JSON.stringify(cliente)
-          console.log(cliente);
-          localStorage.setItem('cli',"cliente")
+          //console.log(cliente);
+          
+          localStorage.setItem("cli", JSON.stringify(cliente))
+          
+        
           // redirigir a pagina
           this.irPageCliente()
 

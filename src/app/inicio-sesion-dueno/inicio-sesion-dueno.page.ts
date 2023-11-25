@@ -24,8 +24,12 @@ export class InicioSesionDuenoPage implements OnInit {
       .then(async response => {
         if (response.status == 200) {
           // exitoso
-          // redirigir a pagina
           console.log('Login exitoso');
+
+          const dueno = await response.json();
+          localStorage.setItem("due", JSON.stringify(dueno))
+
+          // redirigir a pagina
           this.irPageDueno()
 
         } else {

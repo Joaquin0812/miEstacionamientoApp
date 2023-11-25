@@ -19,8 +19,8 @@ export class MapaEstacionamientoPage implements OnInit, OnDestroy {
     }
   }
 
-  volverReservar(){
-    this.nav.navigateForward("reservar-estacionamiento")
+  volver(){
+    this.nav.back()
   }
 
   ngOnInit() { }

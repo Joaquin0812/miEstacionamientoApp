@@ -9,9 +9,22 @@ import { LoadingController, NavController } from '@ionic/angular';
 })
 export class DuenoPage {
 
-  dueno:any=""
+  dueno:any
   constructor(public router: Router, public nav:NavController){
-    
+    const due: string | null=localStorage.getItem("due")
+    if (due!==null){
+    const dueno = JSON.parse(due)
+    this.dueno=dueno
+    }
+  }
+
+  estacionamiento(){
+    fetch("http://localhost:3000/estacionamiento?estado=disponible", { method: 'GET' })
+      .then(async response => {
+        const estacionamiento = await response.json();
+      
+      })
+      .catch(error => console.log('error', error));
   }
 
   cerrarSesion(){
@@ -23,7 +36,11 @@ export class DuenoPage {
   irCalificarCliente(){
     this.router.navigate(['/calificar-cliente']);
   }
+  irPerfilDueno(){
+    this.router.navigate(['/perfil-dueno']);
+  }
   irGenerarReporte(){
     this.router.navigate(['/generar-reporte']);
   }
+  
 }

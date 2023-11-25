@@ -9,10 +9,20 @@ import { NavController } from '@ionic/angular';
 })
 export class PerfilClientePage implements OnInit {
 
-  constructor(public route:Router, public nav:NavController) { }
+  cliente:any
+  constructor(public route:Router, public nav:NavController) {
+    
+    const cli: string | null=localStorage.getItem("cli")
+    if (cli!==null){
+    const cliente = JSON.parse(cli)
+    this.cliente=cliente
+    }
+
+   }
 
 
   ngOnInit() {
+    
   }
 
   

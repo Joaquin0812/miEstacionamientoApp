@@ -67,7 +67,11 @@ const routes: Routes = [
   {
     path: 'mapa-estacionamiento',
     loadChildren: () => import('./mapa-estacionamiento/mapa-estacionamiento.module').then( m => m.MapaEstacionamientoPageModule)
+  },  {
+    path: 'perfil-dueno',
+    loadChildren: () => import('./perfil-dueno/perfil-dueno.module').then( m => m.PerfilDuenoPageModule)
   }
+
 
 ];
 
