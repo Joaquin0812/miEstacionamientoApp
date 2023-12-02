@@ -14,7 +14,7 @@ export class GenerarReportePage {
   }
 
   generarReporteTransferencias() {
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 3; i++) {
       const fecha = this.generarFechaAleatoria();
       const monto = Math.floor(Math.random() * 13000) + 2000; // Valores entre $2000 y $15000
       const origen = 'Tarjeta de Crédito';

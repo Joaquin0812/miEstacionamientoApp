@@ -8,13 +8,30 @@ import { NavController } from '@ionic/angular';
   styleUrls: ['./historial-estacionamientos.page.scss'],
 })
 export class HistorialEstacionamientosPage implements OnInit {
-
-  constructor(public route:Router,public nav:NavController) { }
-
-  ngOnInit() {
+  historials: any[] = []
+  constructor(public route: Router, public nav: NavController) { 
+    const cli: string | null = localStorage.getItem("cli")
+    if (cli !== null) {
+      const cliente = JSON.parse(cli)
+      this.cliente = cliente
+    }
   }
 
-  volverCliente(){
+  cliente: any
+  ngOnInit() {
+    fetch(`http://localhost:3000/historial/byCliente?rutcliente=${this.cliente.rut}`, { method: 'GET' })
+      .then(async response => {
+        const historials = await response.json();
+        this.historials = historials;
+      })
+      
+      .catch(error => console.log('error', error));
+
+  }
+
+  
+
+  volverPerfilCliente(){
     this.nav.navigateForward("cliente")
   }
 }
