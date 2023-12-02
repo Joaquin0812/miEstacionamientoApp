@@ -23,14 +23,18 @@ export class HistorialEstacionamientosPage implements OnInit {
       .then(async response => {
         const historials = await response.json();
         this.historials = historials;
+
+        localStorage.setItem("his", JSON.stringify(historials))
       })
       
       .catch(error => console.log('error', error));
 
   }
 
+  irCalificarEstacionamiento(){
+    this.route.navigate(['/calificar-estacionamiento']);
+  }
   
-
   volverPerfilCliente(){
     this.nav.navigateForward("cliente")
   }

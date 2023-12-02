@@ -25,9 +25,6 @@ export class ClientePage implements OnInit {
   irHistorialEstacionamientos(){
     this.nav.navigateForward("/historial-estacionamientos")
   }
-  irCalificarEstacionamiento(){
-    this.nav.navigateForward("/calificar-estacionamiento")
-  }
   irPerfilCliente(){
     this.nav.navigateForward("/perfil-cliente")
   }

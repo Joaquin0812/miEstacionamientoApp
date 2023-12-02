@@ -9,9 +9,18 @@ import { NavController } from '@ionic/angular';
 })
 export class CalificarEstacionamientoPage implements OnInit {
 
-  constructor(public route:Router, public nav:NavController) { }
+  historial:any
+  constructor(public route:Router, public nav:NavController) {
+    const his: string | null=localStorage.getItem("his")
+    if (his!==null){
+    const historial = JSON.parse(his)
+    this.historial=historial
+    }
+   }
 
   ngOnInit() {
+    console.log(this.historial.calificacion);
+    
   }
 
   volverCliente(){
