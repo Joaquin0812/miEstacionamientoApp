@@ -9,7 +9,7 @@ import { NavController } from '@ionic/angular';
 })
 export class HistorialEstacionamientosPage implements OnInit {
   historials: any[] = []
-  constructor(public route: Router, public nav: NavController) { 
+  constructor(public route: Router, public nav: NavController) {
     const cli: string | null = localStorage.getItem("cli")
     if (cli !== null) {
       const cliente = JSON.parse(cli)
@@ -21,21 +21,35 @@ export class HistorialEstacionamientosPage implements OnInit {
   ngOnInit() {
     fetch(`http://localhost:3000/historial/byCliente?rutcliente=${this.cliente.rut}`, { method: 'GET' })
       .then(async response => {
-        const historials = await response.json();
+        const historials: any[] = await response.json();
         this.historials = historials;
-
         localStorage.setItem("his", JSON.stringify(historials))
-      })
-      
-      .catch(error => console.log('error', error));
 
+        const nuevoHistorial = historials.map(h => {
+          fetch(`http://localhost:3000/dueno/byEstacionamiento?idEstacionamiento=${h.idEstacionamiento}`, { method: 'GET' })
+            .then(async response => {
+              const dueno = await response.json();
+              h.dueno = dueno
+              return h
+            })
+            .catch(error => console.log('error', error));
+        })
+
+        console.log(nuevoHistorial);
+        
+        
+      })
+      .catch(error => console.log('error', error));
   }
 
-  irCalificarEstacionamiento(){
+
+
+  irCalificarEstacionamiento(estacionamiento: any) {
+    localStorage.setItem("calificar-estacionamiento", JSON.stringify(estacionamiento))
     this.route.navigate(['/calificar-estacionamiento']);
   }
-  
-  volverPerfilCliente(){
+
+  volverPerfilCliente() {
     this.nav.navigateForward("cliente")
   }
 }
