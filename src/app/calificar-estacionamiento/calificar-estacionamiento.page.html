@@ -5,13 +5,25 @@
 </ion-header>
 
 <ion-content color="light">
-  <ion-list [inset]="true">
+
+  <div id="container">
+    <form (ngSubmit)="submitQuality()">
     <ion-item>
-      <ion-label><strong>Puntuación:</strong> {{estacionamiento.calificacion.puntuacion}}</ion-label>
+      <ion-label position="floating">Puntuación::</ion-label>
+      <ion-input name="puntuacion" [(ngModel)]="puntuacion" type="number"></ion-input>
+      <ion-note slot="helper">Ingresa la puntuación [1-5]</ion-note>
+      <ion-note slot="error">Puntuación Inválida</ion-note>
     </ion-item>
+  
     <ion-item>
-      <ion-label><strong>Comentario:</strong> {{estacionamiento.calificacion.comentario}}</ion-label>
+      <ion-label position="floating">Comentario:</ion-label>
+      <ion-input name="comentario" [(ngModel)]="comentario" type="text"></ion-input>
+      <ion-note slot="helper">Ingresa tu comentario</ion-note>
+      <ion-note slot="error">Ingresa tu comentario correctamente</ion-note>
     </ion-item>
-  </ion-list>
+    
+    <ion-button type="submit" color="tertiary" expand="full">Ingresar</ion-button>
+  </form>
+  </div>
   <ion-button expand="full" color="danger" (click)="volverCliente()">Volver a Menú Cliente</ion-button>
 </ion-content>
