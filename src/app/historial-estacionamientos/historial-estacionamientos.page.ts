@@ -9,6 +9,11 @@ import { NavController } from '@ionic/angular';
 })
 export class HistorialEstacionamientosPage implements OnInit {
   historials: any[] = []
+  historialSeleccionado:string=""
+  puntuacion: string = ""
+  comentario: string = ""
+  isModalOpen = false;
+
   constructor(public route: Router, public nav: NavController) {
     const cli: string | null = localStorage.getItem("cli")
     if (cli !== null) {
@@ -39,9 +44,23 @@ export class HistorialEstacionamientosPage implements OnInit {
       .catch(error => console.log('error', error));
   }
 
-  irCalificarEstacionamiento(estacionamiento: any) {
-    localStorage.setItem("calificar-estacionamiento", JSON.stringify(estacionamiento))
-    this.route.navigate(['/calificar-estacionamiento']);
+  seleccionarHistorial(idHistorial: string) {
+    this.historialSeleccionado = idHistorial
+    this.setOpen(true)
+  }
+
+  calificar(){
+    console.log("El submit funciona");
+    fetch(`http://localhost:3000/historial/calificar?tipoUsuario=cliente&idHistorial=${this.historialSeleccionado}&puntuacion=${this.puntuacion}&comentario=${this.comentario}`, { method: 'PUT' })
+      .then(async response => {
+        console.log(await response.json());
+      })
+      .catch(error => console.log('error', error));
+      this.setOpen(false)
+  }
+
+  setOpen(isOpen: boolean) {
+    this.isModalOpen = isOpen;
   }
 
   volverPerfilCliente() {

@@ -45,16 +45,8 @@ const routes: Routes = [
     loadChildren: () => import('./historial-estacionamientos/historial-estacionamientos.module').then( m => m.HistorialEstacionamientosPageModule)
   },
   {
-    path: 'calificar-estacionamiento',
-    loadChildren: () => import('./calificar-estacionamiento/calificar-estacionamiento.module').then( m => m.CalificarEstacionamientoPageModule)
-  },
-  {
     path: 'perfil-cliente',
     loadChildren: () => import('./perfil-cliente/perfil-cliente.module').then( m => m.PerfilClientePageModule)
-  },
-  {
-    path: 'calificar-cliente',
-    loadChildren: () => import('./calificar-cliente/calificar-cliente.module').then( m => m.CalificarClientePageModule)
   },
   {
     path: 'reservar-estacionamiento',
@@ -67,7 +59,8 @@ const routes: Routes = [
   {
     path: 'mapa-estacionamiento',
     loadChildren: () => import('./mapa-estacionamiento/mapa-estacionamiento.module').then( m => m.MapaEstacionamientoPageModule)
-  },  {
+  },
+  {
     path: 'perfil-dueno',
     loadChildren: () => import('./perfil-dueno/perfil-dueno.module').then( m => m.PerfilDuenoPageModule)
   }
