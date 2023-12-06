@@ -19,7 +19,7 @@ export class HistorialEstacionamientosPage implements OnInit {
 
   cliente: any
   ngOnInit() {
-    fetch(`http://localhost:3000/historial/byCliente?rutcliente=${this.cliente.rut}`, { method: 'GET' })
+    fetch(`http://localhost:3000/historial/byCliente?idCliente=${this.cliente._id}`, { method: 'GET' })
       .then(async response => {
         const historials: any[] = await response.json();
         this.historials = historials;
@@ -34,15 +34,10 @@ export class HistorialEstacionamientosPage implements OnInit {
             })
             .catch(error => console.log('error', error));
         })
-
         console.log(nuevoHistorial);
-        
-        
       })
       .catch(error => console.log('error', error));
   }
-
-
 
   irCalificarEstacionamiento(estacionamiento: any) {
     localStorage.setItem("calificar-estacionamiento", JSON.stringify(estacionamiento))
