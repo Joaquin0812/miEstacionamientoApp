@@ -33,8 +33,8 @@ export class DuenoPage {
   irAEstacionamiento(){
     this.router.navigate(['/estacionamiento']);
   }
-  irCalificarCliente(){
-    this.router.navigate(['/calificar-cliente']);
+  irHistorialArrendatarios(){
+    this.router.navigate(['/historial-arrendatarios']);
   }
   irPerfilDueno(){
     this.router.navigate(['/perfil-dueno']);

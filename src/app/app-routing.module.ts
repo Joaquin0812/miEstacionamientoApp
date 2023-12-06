@@ -63,7 +63,11 @@ const routes: Routes = [
   {
     path: 'perfil-dueno',
     loadChildren: () => import('./perfil-dueno/perfil-dueno.module').then( m => m.PerfilDuenoPageModule)
+  },  {
+    path: 'historial-arrendatarios',
+    loadChildren: () => import('./historial-arrendatarios/historial-arrendatarios.module').then( m => m.HistorialArrendatariosPageModule)
   }
+
 
 
 ];
