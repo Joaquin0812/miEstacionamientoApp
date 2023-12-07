@@ -2,12 +2,6 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 
-interface Estacionamiento {
-  direccion: string;
-  valorPorHora: number;
-  estado: string;
-}
-
 @Component({
   selector: 'app-estacionamiento',
   templateUrl: './estacionamiento.page.html',
@@ -15,10 +9,13 @@ interface Estacionamiento {
 })
 export class EstacionamientoPage {
   estacionamientos: any[] = []
-  nuevaDireccion: string = '';
-  nuevoValorPorHora: number = 0;
-
+  direccion: string=""
+  latitud: string=""
+  longitud: string=""
+  valorph: number=0
   dueno: any
+  isModalOpen = false;
+
   constructor(private router: Router, public nav: NavController) {
     const due: string | null = localStorage.getItem("due")
     if (due !== null) {
@@ -39,17 +36,15 @@ export class EstacionamientoPage {
     this.nav.navigateForward('mapa-estacionamiento', { state: estacionamiento });
   }
 
-
-
   //habilitar o deshabilitar estacionamiento
-  cambiarEstado(idEst: String, estadoActual:String) {
-    
+  cambiarEstado(idEst: String, estadoActual: String) {
+
     const estado: String = estadoActual !== "deshabilitado" ? "deshabilitado" : "disponible"
     fetch(`http://localhost:3000/estacionamiento/${idEst}?estado=${estado}`, { method: 'PUT' })
       .then(async response => {
         const estacionamiento = await response.json();
         const estactualizado = this.estacionamientos.findIndex(e => e._id == idEst)
-        this.estacionamientos[estactualizado].disponibilidad=estacionamiento.disponibilidad
+        this.estacionamientos[estactualizado].disponibilidad = estacionamiento.disponibilidad
         //this.estacionamientos = this.estacionamientos.filter(e => e._id !== estacionamiento._id)
       })
       .catch(error => console.log('error', error));
@@ -57,16 +52,22 @@ export class EstacionamientoPage {
 
   }
 
-  agregarEstacionamiento() {
-    this.estacionamientos.push({
-      direccion: this.nuevaDireccion,
-      valorPorHora: this.nuevoValorPorHora,
-      estado: 'Habilitado'
-    });
+  setOpen(isOpen: boolean) {
+    this.isModalOpen = isOpen;
+  }
 
-    // Restablecer los campos del formulario
-    this.nuevaDireccion = '';
-    this.nuevoValorPorHora = 0;
+  agregarEstacionamiento() {
+    this.setOpen(true)
+  }
+
+  agregar(){
+    console.log("El submit funciona");
+    fetch(`http://localhost:3000/estacionamiento/?idDueño=${this.dueno._id}&direccion=${this.direccion}&latitud=${this.latitud}&longitud=${this.longitud}&valorPorHora=${this.valorph}`, { method: 'POST' })
+      .then(async response => {
+        console.log(await response.json());
+      })
+      .catch(error => console.log('error', error));
+      this.setOpen(false)
   }
 
   volverADueno() {
