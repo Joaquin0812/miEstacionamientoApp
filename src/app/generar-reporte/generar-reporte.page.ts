@@ -7,26 +7,26 @@ import { Route, Router } from '@angular/router';
   styleUrls: ['generar-reporte.page.scss'],
 })
 export class GenerarReportePage {
-  transferencias: any[] = [];
+  dueno:any
+  pagos: any[] = []
 
   constructor(private router: Router) {
-    this.generarReporteTransferencias();
-  }
-
-  generarReporteTransferencias() {
-    for (let i = 0; i < 3; i++) {
-      const fecha = this.generarFechaAleatoria();
-      const monto = Math.floor(Math.random() * 13000) + 2000; // Valores entre $2000 y $15000
-      const origen = 'Tarjeta de Crédito';
-
-      this.transferencias.push({ fecha, monto, origen });
+    const due: string | null = localStorage.getItem("due")
+    if (due !== null) {
+      const dueno = JSON.parse(due)
+      this.dueno = dueno
     }
   }
 
-  generarFechaAleatoria() {
-    const fecha = new Date(2023, Math.floor(Math.random() * 12), Math.floor(Math.random() * 28) + 1);
-    return fecha.toISOString().split('T')[0];
-  }
+ ngOnInit(){
+  fetch(`http://localhost:3000/pagos/ids?idDueño=${this.dueno._id}`, { method: 'GET' })
+      .then(async response => {
+        const pagos: any[] = await response.json();
+        this.pagos = pagos;
+        })
+            .catch(error => console.log('error', error))
+ }
+
   volverADueno() {
     this.router.navigate(['/dueno']);
   }

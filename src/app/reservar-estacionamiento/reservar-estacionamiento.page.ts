@@ -36,6 +36,13 @@ export class ReservarEstacionamientoPage implements OnInit {
       .then(async response => {
         console.log(await response.json());
 
+        fetch(`http://localhost:3000/pagos/?idCliente=${this.cliente._id}&idEstacionamiento=${this.estacionamientoSeleccionado}&fecha=${this.fecha}&banco=${this.cliente.cuentaBancaria.banco}&nroCuenta=${this.cliente.cuentaBancaria.nroCuenta}&tipoCuenta=${this.cliente.cuentaBancaria.tipoCuenta}`, { method: 'POST' })
+          .then(async response => {
+            console.log(await response.json());
+          })
+          .catch(error => console.log('error', error));
+
+
         fetch(`http://localhost:3000/estacionamiento/${this.estacionamientoSeleccionado}?estado=reservado`, { method: 'PUT' })
           .then(async response => {
             const estacionamiento = await response.json();

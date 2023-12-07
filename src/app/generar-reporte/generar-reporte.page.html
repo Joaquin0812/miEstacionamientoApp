@@ -1,17 +1,30 @@
-<ion-header>
+<ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-button expand="full" color="danger" (click)="volverADueno()">Volver a Menú de Dueño</ion-button>
+    <ion-title>Reservar Estacionamiento</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-text-center">
-  <ion-list>
-    <ion-item *ngFor="let transferencia of transferencias">
-      <ion-label>
-        <h2>Fecha: {{ transferencia.fecha }}</h2>
-        <p>Monto: ${{ transferencia.monto }}</p>
-        <p>Origen: {{ transferencia.origen }}</p>
-      </ion-label>
-    </ion-item>
-  </ion-list>
-</ion-content>
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="">Reporte de Pagos</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-card *ngFor="let pag of pagos">
+    <ion-card-header>
+      <ion-card-title>FECHA: {{pag.fecha}}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      BANCO: {{pag.banco}}
+    </ion-card-content>
+    <ion-card-content>
+      NRO CUENTA: {{pag.nrocuenta}}
+    </ion-card-content>
+    <ion-card-content>
+      TIPO DE CUENTA: {{pag.tipoCuenta}}
+    </ion-card-content>
+    <ion-card-content>
+      MONTO: {{pag.monto}}
+    </ion-card-content>
+  </ion-card>
+  <ion-button color='danger' (click)="volverADueno()">Volver al Menú</ion-button>
