@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-historial-arrendatarios',
@@ -6,34 +8,53 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./historial-arrendatarios.page.scss'],
 })
 export class HistorialArrendatariosPage implements OnInit {
-  estacionamientos: any[] = []
-  historials: any[]=[]
-  dueno:any
-  constructor() {
+  historials: any[] = []
+  dueno: any
+  historialSeleccionado:string=""
+  puntuacion: string = ""
+  comentario: string = ""
+  isModalOpen = false;
+
+  constructor(public route: Router, public nav: NavController) {
     const due: string | null = localStorage.getItem("due")
     if (due !== null) {
       const dueno = JSON.parse(due)
       this.dueno = dueno
-   }
+    }
   }
-
-
   ngOnInit() {
-    fetch(`http://localhost:3000/estacionamiento/byDueno?idDueño=${this.dueno._id}`, { method: 'GET' })
-   .then(async response => {
-     const estacionamientos = await response.json();
-     this.estacionamientos = estacionamientos;
-     localStorage.setItem("est",estacionamientos)
-   })
-   .catch(error => console.log('error', error));
-   
-   fetch(`http://localhost:3000/historial/arrendatarios?idEstacionamiento=655ed6a0a5f27bcc7d24d3b4`, { method: 'GET' })
+    fetch(`http://localhost:3000/estacionamiento/ids?idDueño=${this.dueno._id}`, { method: 'GET' })
       .then(async response => {
         const historials: any[] = await response.json();
         this.historials = historials;
         localStorage.setItem("his", JSON.stringify(historials))
+        })
+            .catch(error => console.log('error', error))
+  }
+
+  seleccionarHistorial(idHistorial: string) {
+    this.historialSeleccionado = idHistorial
+    this.setOpen(true)
+  }
+
+  setOpen(isOpen: boolean) {
+    this.isModalOpen = isOpen;
+  }
+
+  calificar(){
+    console.log("El submit funciona");
+    fetch(`http://localhost:3000/historial/calificar?tipoUsuario=dueno&idHistorial=${this.historialSeleccionado}&puntuacion=${this.puntuacion}&comentario=${this.comentario}`, { method: 'PUT' })
+      .then(async response => {
+        console.log(await response.json());
       })
       .catch(error => console.log('error', error));
+      this.setOpen(false)
   }
+
+  volverPerfilDueno() {
+    this.nav.navigateForward("dueno")
+  }
+
+  
 
 }
