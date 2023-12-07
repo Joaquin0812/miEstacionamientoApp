@@ -9,7 +9,7 @@ import { NavController } from '@ionic/angular';
 })
 export class HistorialEstacionamientosPage implements OnInit {
   historials: any[] = []
-  historialSeleccionado:string=""
+  historialSeleccionado: string = ""
   puntuacion: string = ""
   comentario: string = ""
   isModalOpen = false;
@@ -27,19 +27,15 @@ export class HistorialEstacionamientosPage implements OnInit {
     fetch(`http://localhost:3000/historial/byCliente?idCliente=${this.cliente._id}`, { method: 'GET' })
       .then(async response => {
         const historials: any[] = await response.json();
-        this.historials = historials;
         localStorage.setItem("his", JSON.stringify(historials))
-
-        const nuevoHistorial = historials.map(h => {
-          fetch(`http://localhost:3000/dueno/byEstacionamiento?idEstacionamiento=${h.idEstacionamiento}`, { method: 'GET' })
-            .then(async response => {
-              const dueno = await response.json();
-              h.dueno = dueno
-              return h
-            })
-            .catch(error => console.log('error', error));
-        })
-        console.log(nuevoHistorial);
+        
+        // Añade informacion del dueño al historial
+        for (const h of historials) {
+          const response = await fetch(`http://localhost:3000/dueno/byEstacionamiento?idEstacionamiento=${h.idEstacionamiento}`, { method: 'GET' })
+          const dueno = await response.json();
+          h.dueno = dueno
+        }
+        this.historials = historials
       })
       .catch(error => console.log('error', error));
   }
@@ -49,14 +45,14 @@ export class HistorialEstacionamientosPage implements OnInit {
     this.setOpen(true)
   }
 
-  calificar(){
+  calificar() {
     console.log("El submit funciona");
     fetch(`http://localhost:3000/historial/calificar?tipoUsuario=cliente&idHistorial=${this.historialSeleccionado}&puntuacion=${this.puntuacion}&comentario=${this.comentario}`, { method: 'PUT' })
       .then(async response => {
         console.log(await response.json());
       })
       .catch(error => console.log('error', error));
-      this.setOpen(false)
+    this.setOpen(false)
   }
 
   setOpen(isOpen: boolean) {

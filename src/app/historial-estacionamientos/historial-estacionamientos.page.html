@@ -17,6 +17,7 @@
     </ion-card-header>
 
     <ion-card-content>
+      Dueño: {{ hist.dueno.nombre }} <br>
       Horas de Uso: {{hist.tiempoDeUso}}
     </ion-card-content>
     <ion-button color='success' (click)="seleccionarHistorial(hist._id)">Calificar</ion-button>
