@@ -12,12 +12,13 @@
   </ion-header>
   <ion-card *ngFor="let hist of historials">
     <ion-card-header>
-      <ion-card-title>ID: {{hist.idEstacionamiento}}</ion-card-title>
-      <ion-card-subtitle>{{hist.fecha}}</ion-card-subtitle>
+      <ion-card-title>{{hist.idEstacionamiento}}</ion-card-title>
+      <ion-card-subtitle>ID RESERVA</ion-card-subtitle>
     </ion-card-header>
 
     <ion-card-content>
-      Horas de Uso: {{hist.tiempoDeUso}}
+      <strong>FECHA:</strong> {{hist.fecha}}<br>
+      <strong>HORAS DE USO:</strong> {{hist.tiempoDeUso}}
     </ion-card-content>
     <ion-button color='success'(click)="seleccionarHistorial(hist._id)">Calificar</ion-button>
   </ion-card>

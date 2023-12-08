@@ -12,18 +12,13 @@
   </ion-header>
   <ion-card *ngFor="let pag of pagos">
     <ion-card-header>
-      <ion-card-title>FECHA: {{pag.fecha}}</ion-card-title>
+      <ion-card-subtitle>FECHA</ion-card-subtitle>
+      <ion-card-title>{{pag.fecha}}</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      BANCO: {{pag.banco}}
-    </ion-card-content>
-    <ion-card-content>
-      NRO CUENTA: {{pag.nrocuenta}}
-    </ion-card-content>
-    <ion-card-content>
-      TIPO DE CUENTA: {{pag.tipoCuenta}}
-    </ion-card-content>
-    <ion-card-content>
+      BANCO: {{pag.banco}}<br>
+      NRO CUENTA: {{pag.nroCuenta}}<br>
+      TIPO DE CUENTA: {{pag.tipoCuenta}}<br>
       MONTO: {{pag.monto}}
     </ion-card-content>
   </ion-card>
