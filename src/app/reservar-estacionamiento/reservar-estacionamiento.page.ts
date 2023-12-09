@@ -32,11 +32,13 @@ export class ReservarEstacionamientoPage implements OnInit {
   }
 
   reservar() {
+    //Generando registro de reserva
     fetch(`http://localhost:3000/historial?idEstacionamiento=${this.estacionamientoSeleccionado}&idCliente=${this.cliente._id}&fecha=${this.fecha}&tiempoDeUso=${this.nhoras}`, { method: 'POST' })
       .then(async response => {
         console.log(await response.json());
 
-        fetch(`http://localhost:3000/pagos/?idCliente=${this.cliente._id}&idEstacionamiento=${this.estacionamientoSeleccionado}&fecha=${this.fecha}&banco=${this.cliente.cuentaBancaria.banco}&nroCuenta=${this.cliente.cuentaBancaria.nroCuenta}&tipoCuenta=${this.cliente.cuentaBancaria.tipoCuenta}`, { method: 'POST' })
+        //Generando registro de pago
+        fetch(`http://localhost:3000/pagos/?idCliente=${this.cliente._id}&nombreCliente=${this.cliente.nombre}&idEstacionamiento=${this.estacionamientoSeleccionado}&fecha=${this.fecha}&banco=${this.cliente.cuentaBancaria.banco}&nroCuenta=${this.cliente.cuentaBancaria.nroCuenta}&tipoCuenta=${this.cliente.cuentaBancaria.tipoCuenta}`, { method: 'POST' })
           .then(async response => {
             console.log(await response.json());
           })
